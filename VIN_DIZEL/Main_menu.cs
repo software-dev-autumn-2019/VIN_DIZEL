@@ -30,15 +30,18 @@ namespace VIN_DIZEL
                 {
 
                     dict = slovo;
+                    string my_request = slovo["Url"].Replace("http:", "https:");
                     //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
+                    if (slovo["Url"][slovo["Url"].Length - 1] != '/')
+                        my_request += "/";
 
-                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(slovo["Url"]);
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(my_request);
                     request.Method = "HEAD";
                     request.AllowAutoRedirect = false;
                     using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
                     {
                         if (response.StatusCode == HttpStatusCode.OK)
-                            MyBox.Text = slovo["Url"];
+                            MyBox.Text = my_request;
                         else
                         {
                             string model = slovo["ModelSysName"].Replace("new-", "");
@@ -200,7 +203,7 @@ namespace VIN_DIZEL
         private void Main_menu_Load(object sender, EventArgs e)
         {
             radioButton1.PerformClick();
-            Task.Run(() =>button2.PerformClick()).Wait();            
+            button2.PerformClick();            
         }
     }
 }
