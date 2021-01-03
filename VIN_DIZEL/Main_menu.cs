@@ -32,7 +32,24 @@ namespace VIN_DIZEL
                 {
 
                     dict = slovo;
-                    MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
+                    //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
+
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(slovo["Url"]);
+                    request.Method = "HEAD";
+                    request.AllowAutoRedirect = false;
+                    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                    {
+                        if (response.StatusCode == HttpStatusCode.OK)
+                            MyBox.Text = slovo["Url"];
+                        else
+                        {
+                            string model = slovo["ModelSysName"].Replace("new-", "");
+                            string order = slovo["OrderNumber"];
+                            MyBox.Text = $@"https://sales.mercedes-cardinal.ru/amg/{model}/{order}/";
+                        }
+                    }
+
+         
                     listBox1.DataSource = dict.Keys.ToList();
                     dict.Count();
                     //При изменении индекса выбранного элемента списка показываем соответствующий элемент словаря
@@ -180,6 +197,12 @@ namespace VIN_DIZEL
                 url = "https://cars.mercedes-benz.ru/api/Cars/GetList?";
                 Task.Run(My_House);
             }
+        }
+
+        private void Main_menu_Load(object sender, EventArgs e)
+        {
+            radioButton1.PerformClick();
+            Task.Run(() =>button2.PerformClick()).Wait();            
         }
     }
 }
