@@ -31,26 +31,45 @@ namespace VIN_DIZEL
 
                     dict = slovo;
                     string my_request = slovo["Url"].Replace("http:", "https:");
+                    string model = slovo["ModelSysName"].Replace("new-", "");
+                    string order = slovo["OrderNumber"];
+                    bool rename = false;
                     //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
                     if (slovo["Url"][slovo["Url"].Length - 1] != '/')
                         my_request += "/";
 
+                    if (slovo["Url"][slovo["Url"].Length - 1] != '/')
+                        my_request += "/";
+                    if (slovo["Url"].Contains("CarDetails") && slovo["Model"].Contains("Maybach"))
+    
+                     my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                    else if (my_request.Contains("CarDetails"))
+                    {
+                        my_request = $@"https://sales.mercedes-cardinal.ru/car/{model}/{order}/";
+                    }
+
                     HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(my_request);
                     request.Method = "HEAD";
                     request.AllowAutoRedirect = false;
-                    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                    {
-                        if (response.StatusCode == HttpStatusCode.OK)
-                            MyBox.Text = my_request;
-                        else
-                        {
-                            string model = slovo["ModelSysName"].Replace("new-", "");
-                            string order = slovo["OrderNumber"];
-                            MyBox.Text = $@"https://sales.mercedes-cardinal.ru/amg/{model}/{order}/";
-                        }
-                    }
 
-         
+                    //    try
+                    //    {
+                    //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
+
+
+                    using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
+                        {
+                            if (response.StatusCode != HttpStatusCode.OK)
+                            my_request = $@"https://sales.mercedes-cardinal.ru/amg/{model}/{order}/";
+                            
+                        }
+
+                //    }
+                //    catch 
+                //   {
+                 //       my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                //    }
+                    MyBox.Text = my_request;
                     listBox1.DataSource = dict.Keys.ToList();
                     dict.Count();
                     //При изменении индекса выбранного элемента списка показываем соответствующий элемент словаря

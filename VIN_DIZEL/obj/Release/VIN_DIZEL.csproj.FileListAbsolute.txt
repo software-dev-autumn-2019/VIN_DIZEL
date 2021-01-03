@@ -1,0 +1,10 @@
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\bin\Release\VIN_DIZEL.exe.config
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\bin\Release\VIN_DIZEL.exe
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\bin\Release\VIN_DIZEL.pdb
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.csprojAssemblyReference.cache
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.Main_menu.resources
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.Properties.Resources.resources
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.csproj.GenerateResource.cache
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.csproj.CoreCompileInputs.cache
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.exe
+C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Release\VIN_DIZEL.pdb
