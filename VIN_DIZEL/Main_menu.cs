@@ -1,9 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -15,7 +13,7 @@ namespace VIN_DIZEL
 {
     public partial class Main_menu : Form
     {
-       
+
         List<Dictionary<string, string>> slovar = new List<Dictionary<string, string>>();
         Dictionary<string, string> dict;
         string my_key;
@@ -33,7 +31,6 @@ namespace VIN_DIZEL
                     string my_request = slovo["Url"].Replace("http:", "https:");
                     string model = slovo["ModelSysName"].Replace("new-", "");
                     string order = slovo["OrderNumber"];
-                    bool rename = false;
                     //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
                     if (slovo["Url"][slovo["Url"].Length - 1] != '/')
                         my_request += "/";
@@ -41,8 +38,10 @@ namespace VIN_DIZEL
                     if (slovo["Url"][slovo["Url"].Length - 1] != '/')
                         my_request += "/";
                     if (slovo["Url"].Contains("CarDetails") && slovo["Model"].Contains("Maybach"))
-    
-                     my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+
+                        my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                    else if (slovo["Url"].Contains("CarDetails") && slovo["Model"].Contains("Новый"))
+                        my_request = $@"https://sales.mercedes-cardinal.ru/amg/{model}/{order}/";
                     else if (my_request.Contains("CarDetails"))
                     {
                         my_request = $@"https://sales.mercedes-cardinal.ru/car/{model}/{order}/";
@@ -52,23 +51,24 @@ namespace VIN_DIZEL
                     request.Method = "HEAD";
                     request.AllowAutoRedirect = false;
 
-                    //    try
-                    //    {
+                        try
+                        {
                     //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
 
 
                     using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
-                        {
-                            if (response.StatusCode != HttpStatusCode.OK)
+                    {
+                        if (response.StatusCode != HttpStatusCode.OK)
                             my_request = $@"https://sales.mercedes-cardinal.ru/amg/{model}/{order}/";
-                            
-                        }
 
-                //    }
-                //    catch 
-                //   {
-                 //       my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
-                //    }
+                    }
+
+                       }
+                      catch 
+                      {
+                           my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                       }
+                    // MyBox.Text = my_request;
                     MyBox.Text = my_request;
                     listBox1.DataSource = dict.Keys.ToList();
                     dict.Count();
@@ -89,7 +89,7 @@ namespace VIN_DIZEL
                         temp["Value"] = kvp.Value;
                         dt.Rows.Add(temp);
                     }
-                 pictureBox1.ImageLocation = slovo["ListImage"];
+                    pictureBox1.ImageLocation = slovo["ListImage"];
                     big_image = slovo["ListImageExteriorBig"];
                 }
 
@@ -149,45 +149,45 @@ namespace VIN_DIZEL
 
             return big_image;
         }
- 
+
         public async Task My_House()
         {
 
 
-   
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
-                ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
-                
-                var client = new HttpClient();
-   
+
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Ssl3 | SecurityProtocolType.Tls | SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+            ServicePointManager.ServerCertificateValidationCallback += (sender, cert, chain, sslPolicyErrors) => true;
+
+            var client = new HttpClient();
 
 
-                HttpResponseMessage httpResponseMessage = await client.GetAsync(url);
 
-                string responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
-                if (httpResponseMessage.IsSuccessStatusCode)
+            HttpResponseMessage httpResponseMessage = await client.GetAsync(url);
+
+            string responseBody = await httpResponseMessage.Content.ReadAsStringAsync();
+            if (httpResponseMessage.IsSuccessStatusCode)
+            {
+                JToken jArray = new JArray();
+                List<string> list = jArray.ToObject<List<string>>();
+
+
+                JToken jObject = JToken.Parse(responseBody);
+                slovar.Clear();
+                foreach (var item in jObject)
                 {
-                    JToken jArray = new JArray();
-                    List<string> list = jArray.ToObject<List<string>>();
-
-
-                    JToken jObject = JToken.Parse(responseBody);
-                    slovar.Clear();
-                    foreach (var item in jObject)
-                    {
-                        slovar.Add(JObject.FromObject(item).ToObject<Dictionary<string, string>>());
-                    }//
+                    slovar.Add(JObject.FromObject(item).ToObject<Dictionary<string, string>>());
+                }//
                 listBox3.Items.Clear();
-                    foreach (var slovo in slovar)
-                    {
+                foreach (var slovo in slovar)
+                {
 
 
-                        listBox3.Items.Add(slovo["OrderNumber"]);
-                    }
-                    listBox3.SelectedIndexChanged += (s, e) => textBox2.Text = listBox3.SelectedItem.ToString();
+                    listBox3.Items.Add(slovo["OrderNumber"]);
                 }
+                listBox3.SelectedIndexChanged += (s, e) => textBox2.Text = listBox3.SelectedItem.ToString();
             }
-            
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -222,7 +222,7 @@ namespace VIN_DIZEL
         private void Main_menu_Load(object sender, EventArgs e)
         {
             radioButton1.PerformClick();
-            button2.PerformClick();            
+            button2.PerformClick();
         }
     }
 }
