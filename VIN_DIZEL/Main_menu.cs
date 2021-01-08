@@ -190,6 +190,9 @@ namespace VIN_DIZEL
                 };
                 label3.Text = listBox3.Items.Count.ToString();
             }
+            listBox3.SelectedIndex = 0;
+
+            button1.PerformClick();
         }
 
 
@@ -228,6 +231,7 @@ namespace VIN_DIZEL
         {
             radioButton1.PerformClick();
             button2.PerformClick();
+
 
         }
     }
