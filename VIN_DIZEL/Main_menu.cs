@@ -31,9 +31,6 @@ namespace VIN_DIZEL
                     string my_request = slovo["Url"].Replace("http:", "https:");
                     string model = slovo["ModelSysName"].Replace("new-", "");
                     string order = slovo["OrderNumber"];
-                    //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
-                    if (slovo["Url"][slovo["Url"].Length - 1] != '/')
-                        my_request += "/";
 
                     if (slovo["Url"][slovo["Url"].Length - 1] != '/')
                         my_request += "/";
@@ -53,7 +50,6 @@ namespace VIN_DIZEL
 
                         try
                         {
-                    //MyBox.Text = "https://sales.mercedes-cardinal.ru/model/" + slovo["ModelSysName"] + "/" + slovo["Id"];
 
 
                     using (HttpWebResponse response = request.GetResponse() as HttpWebResponse)
@@ -68,7 +64,7 @@ namespace VIN_DIZEL
                       {
                            my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
                        }
-                    // MyBox.Text = my_request;
+
                     MyBox.Text = my_request;
                     listBox1.DataSource = dict.Keys.ToList();
                     dict.Count();
@@ -178,13 +174,21 @@ namespace VIN_DIZEL
                     slovar.Add(JObject.FromObject(item).ToObject<Dictionary<string, string>>());
                 }//
                 listBox3.Items.Clear();
+                listBox4.Items.Clear();
+                listBox5.Items.Clear();
                 foreach (var slovo in slovar)
                 {
 
-
+                    listBox5.Items.Add(slovo["FinalPrice"]);
                     listBox3.Items.Add(slovo["OrderNumber"]);
+                    listBox4.Items.Add(listBox3.Items.Count);
                 }
-                listBox3.SelectedIndexChanged += (s, e) => textBox2.Text = listBox3.SelectedItem.ToString();
+                listBox3.SelectedIndexChanged += (s, e) => 
+                { textBox2.Text = listBox3.SelectedItem.ToString();
+                    listBox4.SelectedIndex = listBox3.SelectedIndex;
+                    listBox5.SelectedIndex = listBox3.SelectedIndex;
+                };
+                label3.Text = listBox3.Items.Count.ToString();
             }
         }
 
@@ -217,12 +221,14 @@ namespace VIN_DIZEL
                 url = "https://cars.mercedes-benz.ru/api/Cars/GetList?";
                 Task.Run(My_House);
             }
+
         }
 
         private void Main_menu_Load(object sender, EventArgs e)
         {
             radioButton1.PerformClick();
             button2.PerformClick();
+
         }
     }
 }
