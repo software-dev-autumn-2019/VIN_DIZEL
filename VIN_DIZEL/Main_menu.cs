@@ -62,7 +62,7 @@ namespace VIN_DIZEL
                        }
                       catch 
                       {
-                           my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                           my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] +  model.Split('-')[0] }/{order}/";
                        }
 
                     MyBox.Text = my_request;

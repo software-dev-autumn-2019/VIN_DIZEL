@@ -41,3 +41,13 @@ C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Deb
 C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Debug\VIN_DIZEL.csproj.CoreCompileInputs.cache
 C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Debug\VIN_DIZEL.exe
 C:\Users\cbb11\source\repos\software-dev-autumn-2019\VIN_DIZEL\VIN_DIZEL\obj\Debug\VIN_DIZEL.pdb
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\bin\Debug\VIN_DIZEL.exe.config
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\bin\Debug\VIN_DIZEL.exe
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\bin\Debug\VIN_DIZEL.pdb
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.csprojAssemblyReference.cache
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.Main_menu.resources
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.Properties.Resources.resources
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.csproj.GenerateResource.cache
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.csproj.CoreCompileInputs.cache
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.exe
+C:\Users\admin\source\repos\VIN_DIZEL2\VIN_DIZEL\obj\Debug\VIN_DIZEL.pdb
