@@ -44,10 +44,11 @@
             this.label3 = new System.Windows.Forms.Label();
             this.listBox4 = new System.Windows.Forms.ListBox();
             this.listBox5 = new System.Windows.Forms.ListBox();
-            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.label1 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.form1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.form1BindingSource)).BeginInit();
             this.SuspendLayout();
@@ -180,10 +181,6 @@
             this.listBox5.Size = new System.Drawing.Size(71, 342);
             this.listBox5.TabIndex = 15;
             // 
-            // form1BindingSource
-            // 
-            this.form1BindingSource.DataSource = typeof(VIN_DIZEL.Main_menu);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -213,12 +210,26 @@
             this.label5.TabIndex = 18;
             this.label5.Text = "Стоимость";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 605);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(313, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Поиск по VIN, номеру заказа, производственному номмеру";
+            // 
+            // form1BindingSource
+            // 
+            this.form1BindingSource.DataSource = typeof(VIN_DIZEL.Main_menu);
+            // 
             // Main_menu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1188, 630);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label1);
@@ -238,6 +249,7 @@
             this.Controls.Add(this.listBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main_menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Главное меню";
             this.Load += new System.EventHandler(this.Main_menu_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -266,5 +278,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }
