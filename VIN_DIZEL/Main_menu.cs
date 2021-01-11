@@ -62,7 +62,7 @@ namespace VIN_DIZEL
                        }
                       catch 
                       {
-                           my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] + "-suv-" + model.Split('-')[0] }/{order}/";
+                           my_request = $@"https://sales.mercedes-cardinal.ru/car/{model.Split('-')[1] +  model.Split('-')[0] }/{order}/";
                        }
 
                     MyBox.Text = my_request;
@@ -187,6 +187,7 @@ namespace VIN_DIZEL
                 { textBox2.Text = listBox3.SelectedItem.ToString();
                     listBox4.SelectedIndex = listBox3.SelectedIndex;
                     listBox5.SelectedIndex = listBox3.SelectedIndex;
+                    button1.PerformClick();
                 };
                 label3.Text = listBox3.Items.Count.ToString();
             }
