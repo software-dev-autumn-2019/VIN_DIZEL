@@ -239,6 +239,12 @@ namespace VIN_DIZEL
             dataGridView1.Columns[2].Width = 180;
             dataGridView1.AllowUserToAddRows = false;
             dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
+            this.Invoke((MethodInvoker)delegate
+            {
+                dataGridView1.ScrollBars = ScrollBars.Both; // runs on UI thread
+            });
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
