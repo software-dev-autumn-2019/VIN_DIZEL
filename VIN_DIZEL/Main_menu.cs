@@ -169,20 +169,22 @@ namespace VIN_DIZEL
 
                 JToken jObject = JToken.Parse(responseBody);
                 slovar.Clear();
+        
+                dataGridView1.Rows.Clear();
                 foreach (var item in jObject)
+          
                 {
                     slovar.Add(JObject.FromObject(item).ToObject<Dictionary<string, string>>());
                 }//
-                listBox3.Items.Clear();
-                listBox4.Items.Clear();
-                listBox5.Items.Clear();
-                foreach (var slovo in slovar)
+                /* listBox3.Items.Clear();
+                 listBox4.Items.Clear();
+                 listBox5.Items.Clear();*/
+                System.Threading.Thread TMyfunc = new System.Threading.Thread(delegate ()
                 {
-
-                    listBox5.Items.Add(slovo["FinalPrice"]);
-                    listBox3.Items.Add(slovo["OrderNumber"]);
-                    listBox4.Items.Add(listBox3.Items.Count);
-                }
+                    Data_Insert();
+                });
+                TMyfunc.Start();
+                /*
                 listBox3.SelectedIndexChanged += (s, e) => 
                 { textBox2.Text = listBox3.SelectedItem.ToString();
                     listBox4.SelectedIndex = listBox3.SelectedIndex;
@@ -191,11 +193,53 @@ namespace VIN_DIZEL
                 };
                 label3.Text = listBox3.Items.Count.ToString();
             }
-            listBox3.SelectedIndex = 0;
+            
+            */
+   
+                button1.PerformClick();
+            }
+          
 
-            button1.PerformClick();
         }
+            private void Data_Insert()
+            {
+                /*  foreach (var slovo in slovar)
+                  {
 
+                      listBox5.Items.Add(slovo["FinalPrice"]);
+                      listBox3.Items.Add(slovo["OrderNumber"]);
+                      listBox4.Items.Add(listBox3.Items.Count);
+                  }*/
+                DataTable table = new DataTable();
+
+
+            dataGridView1.RowHeadersVisible = false;
+   
+                table.Columns.Add("Заказ");
+                table.Columns.Add("Стоимость");
+            table.Columns.Add("Наименование");
+
+            int my_int = 1;
+
+                foreach (var slovo in slovar)
+                {
+                    DataRow row = table.NewRow();
+
+                    row[0] = slovo["OrderNumber"];
+                    row[1] = slovo["FinalPrice"];
+                row[2] = slovo["Engine"];
+                    table.Rows.Add(row);
+                    my_int++;
+                }
+                dataGridView1.DataSource = table;
+            label3.Text = (my_int -1).ToString();
+
+            dataGridView1.Columns[0].Width = 75;
+            dataGridView1.Columns[1].Width = 60;
+            dataGridView1.Columns[2].Width = 180;
+            dataGridView1.AllowUserToAddRows = false;
+            dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -234,6 +278,15 @@ namespace VIN_DIZEL
             button2.PerformClick();
 
 
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+        
+                textBox2.Text = dataGridView1.Rows?[e.RowIndex]?.Cells[0]?.Value.ToString();
+                button1.PerformClick();
+        
+        
         }
     }
 }
