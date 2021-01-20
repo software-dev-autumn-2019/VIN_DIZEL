@@ -241,7 +241,7 @@ namespace VIN_DIZEL
             dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirection.Ascending);
             this.Invoke((MethodInvoker)delegate
             {
-                dataGridView1.ScrollBars = ScrollBars.Both; // runs on UI thread
+                dataGridView1.ScrollBars = ScrollBars.Vertical; // runs on UI thread
             });
 
 
